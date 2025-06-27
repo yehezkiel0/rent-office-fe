@@ -8,7 +8,7 @@ import { bookingSchema } from "../types/validationBooking";
 export default function BookOffice() {
   const { slug } = useParams<{ slug: string }>();
   const [office, setOffice] = useState<Office | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -46,10 +46,10 @@ export default function BookOffice() {
         setUniqueCode(generatedUniqueCode);
         setTotalAmountWithUniqueCode(grandTotal);
 
-        setFormData((prevFormData) => ({
-          ...prevFormData,
+        setFormData((prevData) => ({
+          ...prevData,
           office_space_id: officeSpaceId,
-          totalAmountWithUniqueCode: grandTotal,
+          total_amount: grandTotal,
         }));
 
         setLoading(false);
@@ -87,7 +87,7 @@ export default function BookOffice() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log("Validating form data...");
@@ -107,7 +107,6 @@ export default function BookOffice() {
         "http://localhost:8000/api/booking-transaction",
         {
           ...formData,
-          unique_code: uniqueCode,
         },
         {
           headers: {
@@ -121,7 +120,7 @@ export default function BookOffice() {
       navigate("/success-booking", {
         state: {
           office,
-          booking: response.data,
+          booking: response.data.data,
         },
       });
     } catch (error: unknown) {
@@ -154,7 +153,7 @@ export default function BookOffice() {
         />
       </div>
       <form
-        action="booking-finished.html"
+        onSubmit={handleSubmit}
         className="relative flex justify-center max-w-[1130px] mx-auto gap-[30px] mb-20 z-20"
       >
         <div className="flex flex-col shrink-0 w-[500px] h-fit rounded-[20px] border border-[#E0DEF7] p-[30px] gap-[30px] bg-white">
