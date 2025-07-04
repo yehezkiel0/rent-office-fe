@@ -2,8 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Office } from "../types/type";
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import axios from "axios";
 import { bookingSchema } from "../types/validationBooking";
+import apiClient, { isAxiosError } from "../services/apiService";
 
 export default function BookOffice() {
   const { slug } = useParams<{ slug: string }>();
@@ -29,12 +29,8 @@ export default function BookOffice() {
 
   useEffect(() => {
     console.log("fetching office data...");
-    axios
-      .get(`http://localhost:8000/api/office/${slug}`, {
-        headers: {
-          "X-API-KEY": "awawf2244afafakkh2",
-        },
-      })
+    apiClient
+      .get(`/office/${slug}`)
       .then((response) => {
         console.log("Office data fetched successfully:", response.data.data);
         setOffice(response.data.data);
@@ -55,7 +51,7 @@ export default function BookOffice() {
         setLoading(false);
       })
       .catch((error: unknown) => {
-        if (axios.isAxiosError(error)) {
+        if (isAxiosError(error)) {
           console.error("Error fetching office data:", error.message);
           setError(error.message);
         } else {
@@ -103,17 +99,9 @@ export default function BookOffice() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/booking-transaction",
-        {
-          ...formData,
-        },
-        {
-          headers: {
-            "X-API-KEY": "awawf2244afafakkh2",
-          },
-        }
-      );
+      const response = await apiClient.post("/booking-transaction", {
+        ...formData,
+      });
 
       console.log("Form submitted successfully:", response.data);
 
@@ -124,7 +112,7 @@ export default function BookOffice() {
         },
       });
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
+      if (isAxiosError(error)) {
         console.error("Error submitting form:", error.message);
         setError(error.message);
       } else {

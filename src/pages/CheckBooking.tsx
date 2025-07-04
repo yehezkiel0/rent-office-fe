@@ -2,8 +2,8 @@ import { useState } from "react";
 import { z } from "zod";
 import { BookingDetails } from "../types/type";
 import { viewBookingSchema } from "../types/validationBooking";
-import axios from "axios";
 import Navbar from "../components/Navbar";
+import apiClient, { isAxiosError } from "../services/apiService";
 
 export default function CheckBooking() {
   const [formData, setFormData] = useState({
@@ -43,24 +43,16 @@ export default function CheckBooking() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/check-booking",
-        {
-          ...formData,
-        },
-        {
-          headers: {
-            "X-API-KEY": "awawf2244afafakkh2",
-          },
-        }
-      );
+      const response = await apiClient.post("/check-booking", {
+        ...formData,
+      });
 
       console.log("We are checking your booking:", response.data.data);
       setBookingDetails(response.data.data);
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error("Error submitting form:", error.message);
-        setError(error.message);
+      if (isAxiosError(error)) {
+        const message = error.response?.data?.message || error.message;
+        setError(`Booking check failed: ${message}`);
       } else {
         console.error("Unknown error:", error);
         setError("An unknown error occurred while submitting the form.");
