@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import BrowseCityWrapper from "../wrappers/BrowseCityWrapper";
 import BrowseOfficeWrapper from "../wrappers/BrowseOfficeWrapper";
 
@@ -75,7 +76,7 @@ export default function Browse() {
           </div>
         </section>
         <div className="flex flex-col pt-[150px] pb-10 px-[120px] gap-10 bg-[#0D903A]">
-          <div className="logo-contianer flex items-center justify-center flex-wrap max-w-[1130px] h-[38px] mx-auto gap-[60px]">
+          <div className="logo-container flex items-center justify-center flex-wrap max-w-[1130px] h-[38px] mx-auto gap-[60px]">
             <img src="/assets/images/logos/TESLA.svg" alt="clients logo" />
             <img src="/assets/images/logos/Libra 2.svg" alt="clients logo" />
             <img
@@ -237,6 +238,7 @@ export default function Browse() {
         </div>
       </section>
       <BrowseOfficeWrapper />
+      <Footer />
     </>
   );
 }

@@ -1,40 +1,82 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className="bg-white">
+    <nav className="bg-white navbar-container">
       <div className="flex items-center justify-between w-full max-w-[1130px] py-[22px] mx-auto">
         <Link to="/">
           <img src="/assets/images/logos/logo.svg" alt="logo" />
         </Link>
-        <ul className="flex items-center gap-[50px] w-fit">
+        <ul className="flex items-center gap-[30px] w-fit">
           <li>
-            <Link to="/">Browse</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "nav-link-active" : ""}`
+              }
+            >
+              Browse
+            </NavLink>
           </li>
           <li>
-            <Link to="/">Popular</Link>
+            <NavLink
+              to="/popular"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "nav-link-active" : ""}`
+              }
+            >
+              Popular
+            </NavLink>
           </li>
           <li>
-            <Link to="/">Categories</Link>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "nav-link-active" : ""}`
+              }
+            >
+              Categories
+            </NavLink>
           </li>
           <li>
-            <Link to="/">Events</Link>
+            <NavLink
+              to="/events"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "nav-link-active" : ""}`
+              }
+            >
+              Events
+            </NavLink>
           </li>
           <li>
-            <Link to="/">My Booking</Link>
+            <NavLink
+              to="/my-booking"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "nav-link-active" : ""}`
+              }
+            >
+              My Booking
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "nav-link-active" : ""}`
+              }
+            >
+              Contact Us
+            </NavLink>
           </li>
         </ul>
-        <a
-          href="#"
-          className="flex items-center gap-[10px] rounded-full border border-[#000929] py-3 px-5"
-        >
-          <img
-            src="/assets/images/icons/call.svg"
-            className="w-6 h-6"
-            alt="icon"
-          />
-          <span className="font-semibold">Contact Us</span>
-        </a>
+        <div className="flex items-center gap-4">
+          <Link to="/login" className="auth-link">
+            Log In
+          </Link>
+          <Link to="/register" className="auth-button">
+            Register
+          </Link>
+        </div>
       </div>
     </nav>
   );
