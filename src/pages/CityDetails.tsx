@@ -76,12 +76,14 @@ export default function CityDetails() {
         <h2 className="font-bold text-[32px] leading-[48px] text-nowrap">
           Browse Offices
         </h2>
-        <div className="grid grid-cols-3 gap-[30px]">
-          {city.officeSpaces.map((office) => (
-            <Link to={`/office/${office.slug}`} key={office.id}>
-              <OfficeCard office={office} />
-            </Link>
-          ))}
+        <div className="browse-office-grid-container">
+          <div className="browse-office-grid">
+            {city.officeSpaces.map((office) => (
+              <Link to={`/office/${office.slug}`} key={office.id}>
+                <OfficeCard office={office} />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
       <Footer />

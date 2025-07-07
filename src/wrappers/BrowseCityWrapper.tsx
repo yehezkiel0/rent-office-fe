@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { City } from "../types/type";
 import { Link } from "react-router-dom";
 import apiClient from "../services/apiService";
+import { Autoplay } from "swiper/modules";
 export default function BrowseCityWrapper() {
   const [cities, setCities] = useState<City[]>([]);
 
@@ -51,29 +52,33 @@ export default function BrowseCityWrapper() {
           Explore All Cities
         </a>
       </div>
-      <div className="cities-swiper-container">
-        <div className="swiper w-full">
-          <div className="swiper-wrapper">
-            <Swiper
-              direction="horizontal"
-              slidesPerView="auto"
-              spaceBetween={30}
-              slidesOffsetAfter={30}
-              slidesOffsetBefore={30}
-              className="cities-swiper"
-            >
-              {cities.map((city) => (
-                <SwiperSlide
-                  key={city.id}
-                  className="!w-fit first-of-type:pl-[calc((100%-1130px-60px)/2)] last-of-type:pr-[calc((100%-1130px-60px)/2)]"
-                >
-                  <Link to={`/city/${city.slug}`}>
-                    <CityCard city={city} />
-                  </Link>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
+      <div className="cities-container">
+        <div className="cities-swiper-container">
+          <Swiper
+            modules={[Autoplay]}
+            direction="horizontal"
+            slidesPerView="auto"
+            spaceBetween={30}
+            slidesOffsetAfter={30}
+            slidesOffsetBefore={30}
+            className="cities-swiper"
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+          >
+            {cities.map((city) => (
+              <SwiperSlide
+                key={city.id}
+                className="!w-fit first-of-type:pl-[calc((100%-1130px-60px)/2)] last-of-type:pr-[calc((100%-1130px-60px)/2)]"
+              >
+                <Link to={`/city/${city.slug}`}>
+                  <CityCard city={city} />
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
