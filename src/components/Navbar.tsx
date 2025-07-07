@@ -5,9 +5,11 @@ export default function Navbar() {
     <nav className="bg-white navbar-container">
       <div className="flex items-center justify-between w-full max-w-[1130px] py-[22px] mx-auto">
         <Link to="/">
-          <img src="/assets/images/logos/logo.svg" alt="logo" />
+          <div className="font-extrabold text-[28px] leading-[38px] cursor-pointer">
+            Rent Office
+          </div>
         </Link>
-        <ul className="flex items-center gap-[30px] w-fit">
+        <ul className="flex items-center gap-[10px] w-fit">
           <li>
             <NavLink
               to="/"
@@ -50,7 +52,7 @@ export default function Navbar() {
           </li>
           <li>
             <NavLink
-              to="/my-booking"
+              to="/check-booking"
               className={({ isActive }) =>
                 `nav-link ${isActive ? "nav-link-active" : ""}`
               }

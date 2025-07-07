@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { Office } from "../types/type";
 import { Link, useParams } from "react-router-dom";
@@ -330,6 +331,7 @@ export default function Details() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

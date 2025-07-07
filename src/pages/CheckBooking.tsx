@@ -3,6 +3,7 @@ import { z } from "zod";
 import { BookingDetails } from "../types/type";
 import { viewBookingSchema } from "../types/validationBooking";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import apiClient, { isAxiosError } from "../services/apiService";
 
 export default function CheckBooking() {
@@ -315,6 +316,7 @@ export default function CheckBooking() {
           </div>
         )}
       </section>
+      <Footer />
     </>
   );
 }

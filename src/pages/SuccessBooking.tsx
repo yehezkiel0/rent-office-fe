@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function SuccessBooking() {
   const location = useLocation();
@@ -68,6 +69,7 @@ export default function SuccessBooking() {
           </Link>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

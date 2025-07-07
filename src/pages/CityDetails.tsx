@@ -3,6 +3,7 @@ import { City } from "../types/type";
 import { Link, useParams } from "react-router-dom";
 import OfficeCard from "../components/OfficeCard";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import apiClient from "../services/apiService";
 
 export default function CityDetails() {
@@ -83,6 +84,7 @@ export default function CityDetails() {
           ))}
         </div>
       </section>
+      <Footer />
     </>
   );
 }
